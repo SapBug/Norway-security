@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Економічна безпека Норвегії — Аналітика</title>
+  <meta name="description" content="Аналіз економічної безпеки Норвегії 2019–2023: показники, порогові значення, графіки, загрози та висновки.">
+
+  <!-- Шрифти з підтримкою кирилиці -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS через CDN -->
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Manrope', 'system-ui', 'sans-serif'],
+            display: ['"Playfair Display"', 'Georgia', 'serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace']
+          },
+          colors: {
+            fjord: { 50: '#f1f5fb', 100: '#dde6f3', 200: '#b9cbe6', 300: '#8aa7d3', 400: '#5a7fbb', 500: '#3b5f9f', 600: '#2c4a83', 700: '#233b69', 800: '#1b2d50', 900: '#121f38', 950: '#0b1424' },
+            nordred: { 500: '#c8102e', 600: '#a50d26' }
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Chart.js через CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+  <!-- ===== Навігація (спільна) ===== -->
+  <header class="site-header sticky top-0 z-50 bg-fjord-950/90 backdrop-blur border-b border-white/10">
+    <nav class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between" aria-label="Головне меню">
+      <a href="index.html" class="flex items-center gap-3 text-white">
+        <span class="flag-mark" aria-hidden="true"></span>
+        <span class="font-display text-lg font-bold leading-tight">Економічна безпека <span class="text-fjord-300">Норвегії</span></span>
+      </a>
+      <button id="menu-toggle" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg text-white hover:bg-white/10" aria-label="Відкрити меню" aria-expanded="false" aria-controls="mobile-menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <ul class="hidden md:flex items-center gap-1 text-sm font-semibold">
+        <li><a href="index.html" class="nav-link">Головна</a></li>
+        <li><a href="analysis.html" class="nav-link is-active" aria-current="page">Аналітика</a></li>
+      </ul>
+    </nav>
+    <ul id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-1 text-sm font-semibold">
+      <li><a href="index.html" class="nav-link block">Головна</a></li>
+      <li><a href="analysis.html" class="nav-link block is-active" aria-current="page">Аналітика</a></li>
+    </ul>
+  </header>
+
+  <main>
+    <!-- ===== Заголовок сторінки ===== -->
+    <section class="hero relative overflow-hidden bg-fjord-950 text-white">
+      <div class="hero-lines" aria-hidden="true"></div>
+      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 pt-16 pb-14">
+        <p class="font-mono text-xs uppercase tracking-[0.25em] text-fjord-300 mb-4">Аналітична сторінка · 2019–2023</p>
+        <h1 class="font-display text-4xl md:text-5xl font-bold leading-tight max-w-3xl">Аналіз економічної безпеки Норвегії</h1>
+        <p class="mt-5 text-fjord-100/90 max-w-3xl leading-relaxed">
+          На основі відкритих даних Світового банку за 2019–2023 роки сформовано репрезентативну вибірку
+          індикаторів економічної безпеки Норвегії. Розрахунки та оцінювання рівнів безпеки виконано
+          відповідно до наданої шкали.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-2 text-xs">
+          <span class="lvl lvl-opt">Оптимальний</span>
+          <span class="lvl lvl-sat">Задовільний</span>
+          <span class="lvl lvl-unsat">Незадовільний</span>
+          <span class="lvl lvl-dang">Небезпечний</span>
+          <span class="lvl lvl-crit">Абсолютна небезпека</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Підменю розділів -->
+    <nav class="subnav sticky top-16 z-40 bg-slate-50/90 backdrop-blur border-b border-slate-200" aria-label="Розділи сторінки">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex gap-2 overflow-x-auto">
+        <a href="#kpi">Показники 2023</a>
+        <a href="#indicators">Оцінювання рівнів</a>
+        <a href="#data">Вихідні дані</a>
+        <a href="#thresholds">Порогові значення</a>
+        <a href="#charts">Графіки</a>
+        <a href="#trends">Тенденції та загрози</a>
+        <a href="#conclusion">Висновок</a>
+      </div>
+    </nav>
+
+    <!-- ===== KPI 2023 ===== -->
+    <section id="kpi" class="max-w-6xl mx-auto px-4 sm:px-6 pt-14 scroll-mt-32">
+      <p class="section-kicker">Огляд</p>
+      <h2 class="font-display text-3xl font-bold text-fjord-950 mb-6">Ключові показники у 2023 році</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="kpi reveal"><span class="kpi-label">Урожайність зернових</span><span class="kpi-value">47,5 <small class="text-sm text-slate-500">ц/га</small></span><span class="lvl lvl-opt self-start">Оптимальний</span></div>
+        <div class="kpi reveal"><span class="kpi-label">Тривалість життя (ж / ч)</span><span class="kpi-value">84,6 / 81,4</span><span class="lvl lvl-opt self-start">Оптимальний</span></div>
+        <div class="kpi reveal"><span class="kpi-label">Смертність немовлят (ж / ч)</span><span class="kpi-value">1,6 / 2,0 <small class="text-sm text-slate-500">‰</small></span><span class="lvl lvl-opt self-start">Оптимальний</span></div>
+        <div class="kpi reveal"><span class="kpi-label">Покриття імпорту експортом</span><span class="kpi-value">1,26</span><span class="lvl lvl-unsat self-start">Незадовільний</span></div>
+        <div class="kpi reveal"><span class="kpi-label">Витрати на R&amp;D</span><span class="kpi-value">2,12 <small class="text-sm text-slate-500">% ВВП</small></span><span class="lvl lvl-sat self-start">Задовільний</span></div>
+        <div class="kpi reveal"><span class="kpi-label">Коефіцієнт фондів</span><span class="kpi-value">5,75 <small class="text-sm text-slate-500">раза</small></span><span class="lvl lvl-dang self-start">Небезпечний</span></div>
+        <div class="kpi reveal"><span class="kpi-label">Державний борг</span><span class="kpi-value">38,1 <small class="text-sm text-slate-500">% ВВП</small></span><span class="lvl lvl-unsat self-start">Незадовільний</span></div>
+        <div class="kpi reveal bg-fjord-950 border-fjord-950"><span class="kpi-label text-fjord-300">Пік покриття (2022)</span><span class="kpi-value text-white">2,15</span><span class="lvl lvl-crit self-start">Абсолютна небезпека</span></div>
+      </div>
+    </section>
+
+    <!-- ===== Текстовий опис ===== -->
+    <section id="indicators" class="max-w-6xl mx-auto px-4 sm:px-6 pt-20 scroll-mt-32">
+      <p class="section-kicker">01 — Оцінювання</p>
+      <h2 class="font-display text-3xl font-bold text-fjord-950">Оцінювання рівнів економічної безпеки</h2>
+      <p class="mt-3 text-slate-600 max-w-3xl">Опис ключових показників та їхніх рівнів безпеки за період 2019–2023 років.</p>
+
+      <div class="mt-10 grid md:grid-cols-2 gap-x-12 gap-y-9">
+        <article class="indicator reveal" style="border-color:#10b981">
+          <div class="flex flex-wrap items-center gap-2 mb-2"><h3 class="font-bold text-lg text-fjord-950">Урожайність зернових</h3><span class="lvl lvl-opt">Оптимальний</span></div>
+          <p class="text-slate-600 leading-relaxed">Переважно оптимальний рівень (45–55 ц/га). У 2021 році показник дещо знизився до задовільного (44,5 ц/га), а у 2022–2023 рр. відновився до 48,0 та 47,5 ц/га.</p>
+        </article>
+        <article class="indicator reveal" style="border-color:#10b981">
+          <div class="flex flex-wrap items-center gap-2 mb-2"><h3 class="font-bold text-lg text-fjord-950">Тривалість життя та дитяча смертність</h3><span class="lvl lvl-opt">Оптимальний</span></div>
+          <p class="text-slate-600 leading-relaxed">Стабільно оптимальний рівень для обох статей. Тривалість життя перевищує 78 років (84,4–84,9 р. у жінок, 81,3–81,6 р. у чоловіків), а смертність немовлят становить менше 4 на 1000 (1,6–2,3 ‰).</p>
+        </article>
+        <article class="indicator reveal" style="border-color:#e11d48">
+          <div class="flex flex-wrap items-center gap-2 mb-2"><h3 class="font-bold text-lg text-fjord-950">Коефіцієнт покриття імпорту експортом</h3><span class="lvl lvl-crit">Нестабільний</span></div>
+          <p class="text-slate-600 leading-relaxed">У 2019–2020 роках рівень був оптимальним (1,0–1,2). У 2021 році перейшов у небезпечний (1,45), а через енергетичну кризу 2022 року та надприбутки від продажу газу коефіцієнт зріс до 2,15 — абсолютна небезпека через надмірний дисбаланс. У 2023 році повернувся до незадовільного рівня (1,26).</p>
+        </article>
+        <article class="indicator reveal" style="border-color:#0ea5e9">
+          <div class="flex flex-wrap items-center gap-2 mb-2"><h3 class="font-bold text-lg text-fjord-950">Витрати на R&amp;D</h3><span class="lvl lvl-sat">Задовільний</span></div>
+          <p class="text-slate-600 leading-relaxed">Стабільно задовільний рівень: показник знаходиться в інтервалі 2–3% ВВП (2,10–2,28%). Після піку 2020 року спостерігається незначне зниження.</p>
+        </article>
+        <article class="indicator reveal" style="border-color:#f97316">
+          <div class="flex flex-wrap items-center gap-2 mb-2"><h3 class="font-bold text-lg text-fjord-950">Майнова нерівність</h3><span class="lvl lvl-dang">Небезпечний</span></div>
+          <p class="text-slate-600 leading-relaxed">Коефіцієнт фондів (співвідношення доходів 10% найбагатших і 10% найбідніших) тримається на рівні 5,7–5,8 раза, що відповідає небезпечному рівню (інтервал 5,5–6,0).</p>
+        </article>
+        <article class="indicator reveal" style="border-color:#f59e0b">
+          <div class="flex flex-wrap items-center gap-2 mb-2"><h3 class="font-bold text-lg text-fjord-950">Державний борг</h3><span class="lvl lvl-unsat">Незадовільний</span></div>
+          <p class="text-slate-600 leading-relaxed">У 2020–2021 роках показник зростав до небезпечного рівня (40–50% ВВП) через пандемічні видатки, але у 2022–2023 роках знизився до незадовільного (30–40% ВВП): 37,4% та 38,1% відповідно.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== Таблиця вихідних даних ===== -->
+    <section id="data" class="max-w-6xl mx-auto px-4 sm:px-6 pt-20 scroll-mt-32">
+      <p class="section-kicker">02 — Дані</p>
+      <h2 class="font-display text-3xl font-bold text-fjord-950">Вихідні дані та розрахунки (2019–2023)</h2>
+      <p class="mt-3 text-slate-600 max-w-3xl">Колір клітинки відповідає рівню економічної безпеки за шкалою. Експорт та імпорт — допоміжні показники для розрахунку коефіцієнта покриття.</p>
+
+      <div class="mt-8 bg-white border border-slate-200 rounded-2xl shadow-sm overflow-x-auto">
+        <table class="data-table min-w-[720px]">
+          <caption class="sr-only">Вихідні дані економічної безпеки Норвегії, 2019–2023</caption>
+          <thead>
+            <tr><th scope="col">Індикатор</th><th scope="col">2019</th><th scope="col">2020</th><th scope="col">2021</th><th scope="col">2022</th><th scope="col">2023</th></tr>
+          </thead>
+          <tbody>
+            <tr class="group-row"><th colspan="6">Продовольча безпека</th></tr>
+            <tr><th scope="row">Урожайність зернових (ц/га)</th><td class="c-opt">45,1</td><td class="c-opt">46,2</td><td class="c-sat">44,5</td><td class="c-opt">48,0</td><td class="c-opt">47,5</td></tr>
+
+            <tr class="group-row"><th colspan="6">Соціально-демографічна безпека</th></tr>
+            <tr><th scope="row">Тривалість життя (жінки, років)</th><td class="c-opt">84,7</td><td class="c-opt">84,9</td><td class="c-opt">84,7</td><td class="c-opt">84,4</td><td class="c-opt">84,6</td></tr>
+            <tr><th scope="row">Тривалість життя (чоловіки, років)</th><td class="c-opt">81,3</td><td class="c-opt">81,5</td><td class="c-opt">81,6</td><td class="c-opt">81,3</td><td class="c-opt">81,4</td></tr>
+            <tr><th scope="row">Смертність немовлят (жінки, ‰)</th><td class="c-opt">1,9</td><td class="c-opt">1,8</td><td class="c-opt">1,7</td><td class="c-opt">1,6</td><td class="c-opt">1,6</td></tr>
+            <tr><th scope="row">Смертність немовлят (чоловіки, ‰)</th><td class="c-opt">2,3</td><td class="c-opt">2,1</td><td class="c-opt">2,1</td><td class="c-opt">2,0</td><td class="c-opt">2,0</td></tr>
+            <tr><th scope="row">Доходи топ-10% / найбідніших 10% (разів)</th><td class="c-dang">5,78</td><td class="c-dang">5,75</td><td class="c-dang">5,80</td><td class="c-dang">5,72</td><td class="c-dang">5,75</td></tr>
+
+            <tr class="group-row"><th colspan="6">Зовнішньоекономічна безпека</th></tr>
+            <tr><th scope="row">Експорт товарів і послуг (% ВВП)</th><td>37,0</td><td>34,1</td><td>42,5</td><td>71,3</td><td>45,0</td></tr>
+            <tr><th scope="row">Імпорт товарів і послуг (% ВВП)</th><td>31,5</td><td>28,6</td><td>29,2</td><td>33,1</td><td>35,5</td></tr>
+            <tr class="highlight-row"><th scope="row">Коеф. покриття імпорту експортом</th><td class="c-opt">1,17</td><td class="c-opt">1,19</td><td class="c-dang">1,45</td><td class="c-crit">2,15</td><td class="c-unsat">1,26</td></tr>
+
+            <tr class="group-row"><th colspan="6">Інноваційна та фінансова безпека</th></tr>
+            <tr><th scope="row">Витрати на R&amp;D (% ВВП)</th><td class="c-sat">2,15</td><td class="c-sat">2,28</td><td class="c-sat">2,24</td><td class="c-sat">2,10</td><td class="c-sat">2,12</td></tr>
+            <tr><th scope="row">Борг центрального уряду (% ВВП)</th><td class="c-dang">40,5</td><td class="c-dang">46,5</td><td class="c-dang">43,2</td><td class="c-unsat">37,4</td><td class="c-unsat">38,1</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-xs text-slate-500">Джерело: World Bank Open Data; розрахунки автора. Коефіцієнт покриття = експорт / імпорт.</p>
+    </section>
+
+    <!-- ===== Порівняння з пороговими значеннями ===== -->
+    <section id="thresholds" class="max-w-6xl mx-auto px-4 sm:px-6 pt-20 scroll-mt-32">
+      <p class="section-kicker">03 — Порогові значення</p>
+      <h2 class="font-display text-3xl font-bold text-fjord-950">Порівняння фактичних показників із пороговими значеннями</h2>
+
+      <div class="mt-8 bg-white border border-slate-200 rounded-2xl shadow-sm overflow-x-auto">
+        <table class="data-table threshold-table min-w-[900px]">
+          <caption class="sr-only">Рівні економічної безпеки Норвегії за роками</caption>
+          <thead>
+            <tr><th scope="col">Індикатор</th><th scope="col" style="text-align:left">Порогові інтервали шкали</th><th scope="col">2019</th><th scope="col">2020</th><th scope="col">2021</th><th scope="col">2022</th><th scope="col">2023</th><th scope="col">Тенденція</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Урожайність зернових</th>
+              <td class="thr">Оптимальний: 45–55 ц/га<br>Задовільний: нижче 45 ц/га</td>
+              <td><span class="lvl lvl-opt">Опт.</span></td><td><span class="lvl lvl-opt">Опт.</span></td><td><span class="lvl lvl-sat">Задов.</span></td><td><span class="lvl lvl-opt">Опт.</span></td><td><span class="lvl lvl-opt">Опт.</span></td>
+              <td class="trend trend-up">↗ безпечна</td>
+            </tr>
+            <tr>
+              <th scope="row">Тривалість життя (ж / ч)</th>
+              <td class="thr">Оптимальний: понад 78 років</td>
+              <td><span class="lvl lvl-opt">Опт.</span></td><td><span class="lvl lvl-opt">Опт.</span></td><td><span class="lvl lvl-opt">Опт.</span></td><td><span class="lvl lvl-opt">Опт.</span></td><td><span class="lvl lvl-opt">Опт.</span></td>
+              <td class="trend trend-up">→ безпечна</td>
+            </tr>
+            <tr>
+              <th scope="row">Смертність немовлят (ж / ч)</th>
+              <td class="thr">Оптимальний: менше 4 ‰</td>
+              <td><span class="lvl lvl-opt">Опт.</span></td><td><span class="lvl lvl-opt">Опт.</span></td><td><span class="lvl lvl-opt">Опт.</span></td><td><span class="lvl lvl-opt">Опт.</span></td><td><span class="lvl lvl-opt">Опт.</span></td>
+              <td class="trend trend-up">↘ безпечна</td>
+            </tr>
+            <tr>
+              <th scope="row">Покриття імпорту експортом</th>
+              <td class="thr">Оптимальний: 1,0–1,2<br>Вище — зростання дисбалансу до абсолютної небезпеки</td>
+              <td><span class="lvl lvl-opt">Опт.</span></td><td><span class="lvl lvl-opt">Опт.</span></td><td><span class="lvl lvl-dang">Небезп.</span></td><td><span class="lvl lvl-crit">Абс. небезп.</span></td><td><span class="lvl lvl-unsat">Незадов.</span></td>
+              <td class="trend trend-down">⇅ небезпечна</td>
+            </tr>
+            <tr>
+              <th scope="row">Витрати на R&amp;D</th>
+              <td class="thr">Задовільний: 2–3% ВВП<br>Оптимальний: понад 3% ВВП</td>
+              <td><span class="lvl lvl-sat">Задов.</span></td><td><span class="lvl lvl-sat">Задов.</span></td><td><span class="lvl lvl-sat">Задов.</span></td><td><span class="lvl lvl-sat">Задов.</span></td><td><span class="lvl lvl-sat">Задов.</span></td>
+              <td class="trend trend-flat">↘ потребує уваги</td>
+            </tr>
+            <tr>
+              <th scope="row">Майнова нерівність</th>
+              <td class="thr">Небезпечний: 5,5–6,0 раза</td>
+              <td><span class="lvl lvl-dang">Небезп.</span></td><td><span class="lvl lvl-dang">Небезп.</span></td><td><span class="lvl lvl-dang">Небезп.</span></td><td><span class="lvl lvl-dang">Небезп.</span></td><td><span class="lvl lvl-dang">Небезп.</span></td>
+              <td class="trend trend-down">→ небезпечна</td>
+            </tr>
+            <tr>
+              <th scope="row">Державний борг</th>
+              <td class="thr">Незадовільний: 30–40% ВВП<br>Небезпечний: 40–50% ВВП</td>
+              <td><span class="lvl lvl-dang">Небезп.</span></td><td><span class="lvl lvl-dang">Небезп.</span></td><td><span class="lvl lvl-dang">Небезп.</span></td><td><span class="lvl lvl-unsat">Незадов.</span></td><td><span class="lvl lvl-unsat">Незадов.</span></td>
+              <td class="trend trend-up">↘ покращення</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== Графіки ===== -->
+    <section id="charts" class="max-w-6xl mx-auto px-4 sm:px-6 pt-20 scroll-mt-32">
+      <p class="section-kicker">04 — Візуалізація</p>
+      <h2 class="font-display text-3xl font-bold text-fjord-950">Інтерактивні графіки</h2>
+      <p class="mt-3 text-slate-600 max-w-3xl">Наведіть курсор (або торкніться) на точку графіка, щоб побачити значення. Кольорові смуги на тлі — порогові інтервали шкали.</p>
+
+      <div class="mt-8 grid lg:grid-cols-2 gap-6">
+        <figure class="chart-card lg:col-span-2 reveal">
+          <figcaption class="mb-4">
+            <h3 class="font-bold text-lg text-fjord-950">Динаміка державного боргу, % ВВП</h3>
+            <p class="text-sm text-slate-500">Пік у 2020 р. (46,5%) — пандемічні видатки; з 2022 р. — повернення в інтервал 30–40%.</p>
+          </figcaption>
+          <div class="chart-box"><canvas id="debtChart" role="img" aria-label="Лінійний графік державного боргу Норвегії 2019–2023"></canvas></div>
+        </figure>
+
+        <figure class="chart-card reveal">
+          <figcaption class="mb-4">
+            <h3 class="font-bold text-lg text-fjord-950">Коефіцієнт покриття імпорту експортом</h3>
+            <p class="text-sm text-slate-500">Зелена смуга — оптимальний інтервал 1,0–1,2. Колір стовпця — рівень безпеки.</p>
+          </figcaption>
+          <div class="chart-box"><canvas id="coverageChart" role="img" aria-label="Стовпчикова діаграма коефіцієнта покриття імпорту експортом"></canvas></div>
+        </figure>
+
+        <figure class="chart-card reveal">
+          <figcaption class="mb-4">
+            <h3 class="font-bold text-lg text-fjord-950">Експорт та імпорт, % ВВП</h3>
+            <p class="text-sm text-slate-500">Стрибок експорту у 2022 р. до 71,3% ВВП — енергетична криза в Європі.</p>
+          </figcaption>
+          <div class="chart-box"><canvas id="tradeChart" role="img" aria-label="Діаграма експорту та імпорту Норвегії у відсотках ВВП"></canvas></div>
+        </figure>
+
+        <figure class="chart-card reveal">
+          <figcaption class="mb-4">
+            <h3 class="font-bold text-lg text-fjord-950">Витрати на R&amp;D, % ВВП</h3>
+            <p class="text-sm text-slate-500">Показник у задовільному інтервалі 2–3%, далеко від оптимальних 3%+.</p>
+          </figcaption>
+          <div class="chart-box"><canvas id="rdChart" role="img" aria-label="Графік витрат на дослідження і розробки"></canvas></div>
+        </figure>
+
+        <figure class="chart-card reveal">
+          <figcaption class="mb-4">
+            <h3 class="font-bold text-lg text-fjord-950">Урожайність зернових, ц/га</h3>
+            <p class="text-sm text-slate-500">Зелена смуга — оптимальний інтервал 45–55 ц/га.</p>
+          </figcaption>
+          <div class="chart-box"><canvas id="cerealChart" role="img" aria-label="Графік урожайності зернових культур"></canvas></div>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===== Тенденції та загрози ===== -->
+    <section id="trends" class="max-w-6xl mx-auto px-4 sm:px-6 pt-20 scroll-mt-32">
+      <p class="section-kicker">05 — Тенденції</p>
+      <h2 class="font-display text-3xl font-bold text-fjord-950">Безпечні та небезпечні тенденції</h2>
+
+      <div class="mt-8 grid md:grid-cols-2 gap-6">
+        <div class="rounded-3xl border border-emerald-200 bg-emerald-50/60 p-6 reveal">
+          <div class="flex items-center gap-3 mb-5">
+            <span class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7"/></svg>
+            </span>
+            <h3 class="font-bold text-xl text-emerald-900">Безпечні тенденції</h3>
+          </div>
+          <ul class="space-y-4 text-emerald-950/80">
+            <li class="flex gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0"></span><span><b class="text-emerald-950">Висока тривалість життя</b> — стабільно понад 84 роки у жінок і понад 81 рік у чоловіків.</span></li>
+            <li class="flex gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0"></span><span><b class="text-emerald-950">Зниження смертності немовлят</b> — з 1,9 до 1,6 ‰ (жінки) та з 2,3 до 2,0 ‰ (чоловіки).</span></li>
+            <li class="flex gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0"></span><span><b class="text-emerald-950">Стабільна врожайність</b> — після спаду 2021 р. показник повернувся до оптимального інтервалу (47,5–48,0 ц/га).</span></li>
+            <li class="flex gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0"></span><span><b class="text-emerald-950">Скорочення державного боргу</b> — з 46,5% ВВП у 2020 р. до 38,1% у 2023 р.</span></li>
+          </ul>
+        </div>
+
+        <div class="rounded-3xl border border-rose-200 bg-rose-50/60 p-6 reveal">
+          <div class="flex items-center gap-3 mb-5">
+            <span class="w-10 h-10 rounded-xl bg-rose-600 text-white flex items-center justify-center">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+            </span>
+            <h3 class="font-bold text-xl text-rose-900">Небезпечні тенденції</h3>
+          </div>
+          <ul class="space-y-4 text-rose-950/80">
+            <li class="flex gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-rose-600 shrink-0"></span><span><b class="text-rose-950">Різкі коливання зовнішньої торгівлі</b> — коефіцієнт покриття змінювався від 1,17 до 2,15 за три роки.</span></li>
+            <li class="flex gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-rose-600 shrink-0"></span><span><b class="text-rose-950">Стійка майнова нерівність</b> — коефіцієнт фондів усі п'ять років у небезпечному інтервалі 5,5–6,0.</span></li>
+            <li class="flex gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-rose-600 shrink-0"></span><span><b class="text-rose-950">Стагнація витрат на R&amp;D</b> — зниження з 2,28% (2020) до 2,12% ВВП (2023).</span></li>
+            <li class="flex gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-rose-600 shrink-0"></span><span><b class="text-rose-950">Зростання імпорту</b> — з 28,6% до 35,5% ВВП (2020–2023) на тлі нестабільного експорту.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Загрози -->
+      <h3 class="font-display text-2xl font-bold text-fjord-950 mt-14">Основні загрози економічній безпеці</h3>
+      <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="threat reveal">
+          <span class="threat-num">01</span>
+          <h4 class="font-bold text-fjord-950 mt-3">Енергетична залежність</h4>
+          <p class="text-sm text-slate-600 mt-2">Сильна залежність економіки від експорту нафти та газу робить її чутливою до світових цін на енергоносії.</p>
+        </div>
+        <div class="threat reveal">
+          <span class="threat-num">02</span>
+          <h4 class="font-bold text-fjord-950 mt-3">Зовнішньоторговельний дисбаланс</h4>
+          <p class="text-sm text-slate-600 mt-2">Надприбутки 2022 року сформували надмірний профіцит (коефіцієнт 2,15), що свідчить про нестійкість структури торгівлі.</p>
+        </div>
+        <div class="threat reveal">
+          <span class="threat-num">03</span>
+          <h4 class="font-bold text-fjord-950 mt-3">Слабка диверсифікація</h4>
+          <p class="text-sm text-slate-600 mt-2">Витрати на R&amp;D нижче оптимальних 3% ВВП стримують розвиток неенергетичних інноваційних галузей.</p>
+        </div>
+        <div class="threat reveal">
+          <span class="threat-num">04</span>
+          <h4 class="font-bold text-fjord-950 mt-3">Нерівність і борговий тиск</h4>
+          <p class="text-sm text-slate-600 mt-2">Небезпечний рівень коефіцієнта фондів та відчутний державний борг потребують уваги державної політики.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Висновок ===== -->
+    <section id="conclusion" class="max-w-6xl mx-auto px-4 sm:px-6 py-20 scroll-mt-32">
+      <div class="relative overflow-hidden rounded-[2rem] bg-fjord-950 text-white p-8 md:p-12 reveal">
+        <div class="hero-lines" aria-hidden="true"></div>
+        <div class="relative">
+          <p class="font-mono text-xs uppercase tracking-[0.25em] text-fjord-300 mb-4">06 — Загальний висновок</p>
+          <h2 class="font-display text-3xl md:text-4xl font-bold max-w-3xl">Стійкий соціальний фундамент і вразлива макроекономічна кон'юнктура</h2>
+          <div class="mt-8 grid md:grid-cols-2 gap-8 text-fjord-100/90 leading-relaxed">
+            <p>
+              Норвегія демонструє <b class="text-white">високий рівень соціально-демографічної та продовольчої безпеки</b>.
+              Фундаментом стійкості є висока тривалість життя, низька дитяча смертність та стабільна врожайність.
+              Водночас макроекономічна кон'юнктура має <b class="text-white">ознаки вразливості</b>: економіка сильно залежить
+              від експорту енергоносіїв, що створює різкі дисбаланси у зовнішній торгівлі (коефіцієнт покриття імпорту експортом).
+            </p>
+            <p>
+              Показники R&amp;D є задовільними, але для диверсифікації економіки потребують збільшення до оптимального рівня.
+              Помірна майнова нерівність та контрольований, але відчутний державний борг є
+              <b class="text-white">основними зонами, що потребують уваги державної політики</b>.
+            </p>
+          </div>
+          <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/10 text-sm">
+            <div class="bg-fjord-950/70 p-5"><p class="text-emerald-300 font-bold">Сильні сторони</p><p class="mt-1">Тривалість життя, дитяча смертність, врожайність</p></div>
+            <div class="bg-fjord-950/70 p-5"><p class="text-amber-300 font-bold">Зони уваги</p><p class="mt-1">R&amp;D, державний борг</p></div>
+            <div class="bg-fjord-950/70 p-5"><p class="text-rose-300 font-bold">Ризики</p><p class="mt-1">Торговельний дисбаланс, майнова нерівність</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Футер (спільний) ===== -->
+  <footer class="bg-fjord-950 text-fjord-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 flex flex-col md:flex-row gap-6 md:items-center md:justify-between">
+      <div class="flex items-center gap-3">
+        <span class="flag-mark" aria-hidden="true"></span>
+        <div>
+          <p class="text-white font-semibold">Економічна безпека Норвегії</p>
+          <p class="text-sm">Автор: <span class="text-white">Клен Андрій</span> · © 2026</p>
+        </div>
+      </div>
+      <nav class="flex gap-5 text-sm" aria-label="Меню у футері">
+        <a href="index.html" class="hover:text-white">Головна</a>
+        <a href="analysis.html" class="hover:text-white">Аналітика</a>
+      </nav>
+      <p class="text-xs text-fjord-300/80">Джерело даних: World Bank Open Data</p>
+    </div>
+  </footer>
+</body>
+</html>
